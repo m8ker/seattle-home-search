@@ -13,45 +13,52 @@
   *{box-sizing:border-box}
   body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
        color:var(--ink);background:var(--bg);line-height:1.5}
-  .wrap{max-width:1060px;margin:0 auto;padding:28px 20px 60px}
-  header h1{font-size:1.6rem;margin:0 0 6px}
-  .meta{color:var(--muted);font-size:.92rem;margin:0 0 4px}
+  .wrap{max-width:1000px;margin:0 auto;padding:24px 16px 56px}
+  header h1{font-size:1.5rem;margin:0 0 6px;line-height:1.25}
+  .meta{color:var(--muted);font-size:.9rem;margin:0 0 4px}
   .meta strong{color:var(--ink)}
   .verified{background:var(--goodbg);border:1px solid #bfe3cd;color:#13563a;
-            padding:12px 14px;border-radius:10px;font-size:.9rem;margin:16px 0 22px}
+            padding:12px 14px;border-radius:10px;font-size:.88rem;margin:16px 0 20px}
   .verified b{color:#0f4a31}
   .mapcard{background:var(--card);border:1px solid var(--line);border-radius:12px;
-           overflow:hidden;box-shadow:0 1px 3px rgba(20,30,45,.06);margin-bottom:26px}
-  .mapcard iframe{display:block;width:100%;height:460px;border:0}
-  .maptip{padding:10px 14px;font-size:.82rem;color:var(--muted);border-top:1px solid var(--line);
-          display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
-  .maptip a{color:var(--accent);text-decoration:none}
-  h2{font-size:1.12rem;margin:26px 0 12px}
-  .tablecard{background:var(--card);border:1px solid var(--line);border-radius:12px;
-             overflow-x:auto;box-shadow:0 1px 3px rgba(20,30,45,.06)}
-  table{border-collapse:collapse;width:100%;min-width:760px;font-size:.9rem}
-  th,td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--line);vertical-align:top}
-  thead th{background:#f0f3f7;font-size:.74rem;letter-spacing:.04em;text-transform:uppercase;
-           color:var(--muted);position:sticky;top:0}
-  tbody tr:last-child td{border-bottom:0}
-  tbody tr:hover{background:#fafbfc}
-  .addr{font-weight:600}
-  .sub{color:var(--muted);font-size:.82rem;display:block;margin-top:2px}
-  .rent{font-weight:700;white-space:nowrap}
-  .pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:.76rem;font-weight:600;white-space:nowrap}
-  .pill.ok{background:var(--goodbg);color:var(--good)}
-  .phone{font-weight:600;white-space:nowrap}
-  .phone a{color:var(--accent);text-decoration:none}
-  .confirm{color:var(--warn)}
-  .note{color:var(--muted);font-size:.82rem;margin:8px 2px 0}
-  .cards2{display:grid;grid-template-columns:1fr;gap:14px}
+           overflow:hidden;box-shadow:0 1px 3px rgba(20,30,45,.06);margin-bottom:24px}
+  .mapcard iframe{display:block;width:100%;height:420px;border:0}
+  .maptip{padding:10px 14px;font-size:.8rem;color:var(--muted);border-top:1px solid var(--line);
+          display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+  .maptip a{color:var(--accent);text-decoration:none;font-weight:600}
+  h2{font-size:1.1rem;margin:24px 2px 12px}
+  .listings{display:grid;grid-template-columns:1fr;gap:12px}
+  @media (min-width:680px){ .listings{grid-template-columns:1fr 1fr} }
+  .listing{background:var(--card);border:1px solid var(--line);border-radius:12px;
+           padding:15px 16px;box-shadow:0 1px 3px rgba(20,30,45,.05)}
+  .listing-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+  .listing-head h3{margin:0;font-size:1.04rem;line-height:1.25;flex:1 1 auto;min-width:0}
+  .listing-head .pill{flex:0 0 auto}
+  .listing-head h3 a{color:var(--accent);text-decoration:none}
+  .listing-head h3 a:hover{text-decoration:underline}
+  .ext{font-size:.8em;opacity:.7}
+  .bldg{color:var(--muted);font-size:.82rem;margin:3px 0 0}
+  .pill{display:inline-block;padding:3px 9px;border-radius:999px;font-size:.72rem;font-weight:700;white-space:nowrap}
+  .pill.ok{background:var(--goodbg);color:var(--good);border:1px solid #bfe3cd}
+  .specs{display:flex;flex-wrap:wrap;gap:14px 18px;margin:13px 0 0;padding:12px 0 0;border-top:1px solid var(--line)}
+  .spec{display:flex;flex-direction:column;min-width:52px}
+  .spec .k{font-size:.66rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+  .spec .v{font-size:.92rem;font-weight:600}
+  .spec .v.rent{font-size:1.02rem;font-weight:800}
+  .spec .v.confirm{color:var(--warn);font-weight:600;font-size:.84rem}
+  .contact{margin-top:12px;padding-top:11px;border-top:1px solid var(--line);font-size:.9rem}
+  .contact .k{font-size:.66rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-right:6px}
+  .contact a{color:var(--accent);text-decoration:none;font-weight:700}
+  .cards2{display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px}
+  @media (min-width:680px){ .cards2{grid-template-columns:1fr 1fr} }
   .infocard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
   .infocard h3{margin:0 0 6px;font-size:1rem}
-  .excluded li{margin:4px 0}
-  .script{background:#eef3f8;border-left:3px solid var(--accent);padding:12px 16px;border-radius:6px;
-          font-size:.92rem;color:#243b52}
-  footer{color:var(--muted);font-size:.8rem;margin-top:30px;text-align:center}
-  @media (max-width:560px){ .mapcard iframe{height:360px} header h1{font-size:1.35rem} }
+  .infocard a{color:var(--accent);text-decoration:none}
+  .excluded li{margin:5px 0}
+  .script p.q{background:#eef3f8;border-left:3px solid var(--accent);padding:11px 14px;border-radius:6px;
+              font-size:.9rem;color:#243b52;margin:0}
+  .note{color:var(--muted);font-size:.8rem;margin:8px 2px 0}
+  footer{color:var(--muted);font-size:.79rem;margin-top:26px;text-align:center}
 </style>
 </head>
 <body>
@@ -59,89 +66,138 @@
   <header>
     <h1>Fremont Rentals — B.F. Day Elementary Area</h1>
     <p class="meta"><strong>Criteria:</strong> 2+ bedrooms · max $2,400/mo · assigned to B.F. Day Elementary</p>
-    <p class="meta"><strong>Nice-to-haves:</strong> in-unit washer/dryer, yard &nbsp;·&nbsp; <strong>Prepared:</strong> July 27, 2026 · for tours Fri 7/31 &amp; Sat 8/1</p>
+    <p class="meta"><strong>Nice-to-haves:</strong> in-unit washer/dryer, yard &nbsp;·&nbsp; <strong>For tours:</strong> Fri 7/31 &amp; Sat 8/1</p>
   </header>
 
   <div class="verified">
-    ✅ <b>School assignment verified</b> for every listing on 7/27/2026 using Seattle Public Schools'
-    official “Find Your School” lookup — each address returned <b>B.F. Day Elementary</b> as its Attendance Area School.
+    ✅ <b>School assignment verified</b> for every listing on 7/27/2026 via Seattle Public Schools'
+    official “Find Your School” lookup — each returned <b>B.F. Day Elementary</b> as its Attendance Area School.
     Assignments can change between school years; reconfirm with SPS Admissions (206-252-0760) before signing.
   </div>
 
   <div class="mapcard">
     <iframe src="https://www.google.com/maps/d/embed?mid=1Et7z73vkD_1g_XdBlrs-Z3JrwjIT0vA" loading="lazy" title="Map of B.F. Day area rentals"></iframe>
     <div class="maptip">
-      <span>Blue pins = the 7 listings below · pin at 3921 Linden Ave N = B.F. Day Elementary</span>
+      <span>Blue pins = the 7 listings · pin at 3921 Linden Ave N = B.F. Day Elementary</span>
       <a href="https://www.google.com/maps/d/viewer?mid=1Et7z73vkD_1g_XdBlrs-Z3JrwjIT0vA" target="_blank" rel="noopener">Open full map ↗</a>
     </div>
   </div>
 
-  <h2>Verified B.F. Day listings (in budget, 2BR)</h2>
-  <div class="tablecard">
-    <table>
-      <thead>
-        <tr><th>Address / Building</th><th>Rent</th><th>BR/BA</th><th>Sq Ft</th><th>B.F. Day</th><th>W/D</th><th>Contact</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="addr">3609 1st Ave NW, 98107 <span class="sub">Artline Fremont · apartment community</span></td>
-          <td class="rent">Call</td><td>2BR</td><td>~909<span class="sub">2B/2BA plan</span></td>
-          <td><span class="pill ok">✓ Verified</span></td>
-          <td class="confirm">Confirm (newer bldg — usually in-unit)</td>
-          <td class="phone"><a href="tel:+12063124993">(206) 312-4993</a></td>
-        </tr>
-        <tr>
-          <td class="addr">4345 4th Ave NW, 98107</td>
-          <td class="rent">$1,650</td><td>2BR / 2BA</td><td>1,200</td>
-          <td><span class="pill ok">✓ Verified</span></td>
-          <td class="confirm">Confirm on call</td>
-          <td>Apartments.com — “Request tour”</td>
-        </tr>
-        <tr>
-          <td class="addr">201 NW 39th St, 98107 <span class="sub">top-floor condo</span></td>
-          <td class="rent">$1,650</td><td>2BR / 1BA</td><td class="confirm">Confirm</td>
-          <td><span class="pill ok">✓ Verified</span></td>
-          <td class="confirm">Not listed — confirm</td>
-          <td>Contact “Miles” via Apartments.com</td>
-        </tr>
-        <tr>
-          <td class="addr">4215 Linden Ave N #2, 98103</td>
-          <td class="rent">$1,995</td><td>2BR / 1BA</td><td>710</td>
-          <td><span class="pill ok">✓ Verified</span></td>
-          <td class="confirm">Confirm on call</td>
-          <td>Apartments.com / HotPads</td>
-        </tr>
-        <tr>
-          <td class="addr">4461 Woodland Park Ave N #A, 98103</td>
-          <td class="rent">$1,995</td><td>2BR / 1BA</td><td>800</td>
-          <td><span class="pill ok">✓ Verified</span></td>
-          <td class="confirm">Confirm on call</td>
-          <td>Apartments.com / HotPads</td>
-        </tr>
-        <tr>
-          <td class="addr">110 NW 39th St #3, 98107 <span class="sub">condo</span></td>
-          <td class="rent">$2,295</td><td>2BR / 1BA</td><td class="confirm">Confirm</td>
-          <td><span class="pill ok">✓ Verified</span></td>
-          <td class="confirm">Confirm on call</td>
-          <td>HotPads listing</td>
-        </tr>
-        <tr>
-          <td class="addr">4453–4455 Stone Way N, 98103 <span class="sub">Ori Stone Way · apartment community</span></td>
-          <td class="rent">Call</td><td>2BR</td><td class="confirm">Confirm</td>
-          <td><span class="pill ok">✓ Verified</span></td>
-          <td class="confirm">Confirm (newer bldg — usually in-unit)</td>
-          <td class="phone"><a href="tel:+12533523866">(253) 352-3866</a></td>
-        </tr>
-      </tbody>
-    </table>
+  <h2>Verified B.F. Day listings <span style="font-weight:400;color:var(--muted);font-size:.85rem">(tap an address for the listing)</span></h2>
+  <div class="listings">
+
+    <article class="listing">
+      <div class="listing-head">
+        <h3><a href="https://artlinefremont.com/" target="_blank" rel="noopener">3609 1st Ave NW <span class="ext">↗</span></a></h3>
+        <span class="pill ok">✓ B.F. Day</span>
+      </div>
+      <p class="bldg">Artline Fremont · apartment community · 98107</p>
+      <div class="specs">
+        <div class="spec"><span class="k">Rent</span><span class="v rent">Call</span></div>
+        <div class="spec"><span class="k">Beds</span><span class="v">2 BR</span></div>
+        <div class="spec"><span class="k">Sq Ft</span><span class="v">~909</span></div>
+        <div class="spec"><span class="k">W/D</span><span class="v confirm">Confirm · newer bldg</span></div>
+      </div>
+      <div class="contact"><span class="k">Contact</span><a href="tel:+12063124993">(206) 312-4993</a> · leasing office</div>
+    </article>
+
+    <article class="listing">
+      <div class="listing-head">
+        <h3><a href="https://www.redfin.com/WA/Seattle/4345-4th-Ave-NW-98107/home/302533" target="_blank" rel="noopener">4345 4th Ave NW <span class="ext">↗</span></a></h3>
+        <span class="pill ok">✓ B.F. Day</span>
+      </div>
+      <p class="bldg">98107</p>
+      <div class="specs">
+        <div class="spec"><span class="k">Rent</span><span class="v rent">$1,650</span></div>
+        <div class="spec"><span class="k">Beds</span><span class="v">2 BR / 2 BA</span></div>
+        <div class="spec"><span class="k">Sq Ft</span><span class="v">1,200</span></div>
+        <div class="spec"><span class="k">W/D</span><span class="v confirm">Confirm on call</span></div>
+      </div>
+      <div class="contact"><span class="k">Contact</span>Request a tour on the listing</div>
+    </article>
+
+    <article class="listing">
+      <div class="listing-head">
+        <h3><a href="https://www.apartments.com/201-nw-39th-st-seattle-wa/fepygqv/" target="_blank" rel="noopener">201 NW 39th St <span class="ext">↗</span></a></h3>
+        <span class="pill ok">✓ B.F. Day</span>
+      </div>
+      <p class="bldg">Top-floor condo · 98107</p>
+      <div class="specs">
+        <div class="spec"><span class="k">Rent</span><span class="v rent">$1,650</span></div>
+        <div class="spec"><span class="k">Beds</span><span class="v">2 BR / 1 BA</span></div>
+        <div class="spec"><span class="k">Sq Ft</span><span class="v confirm">Confirm</span></div>
+        <div class="spec"><span class="k">W/D</span><span class="v confirm">Not listed — confirm</span></div>
+      </div>
+      <div class="contact"><span class="k">Contact</span>“Miles” via the listing</div>
+    </article>
+
+    <article class="listing">
+      <div class="listing-head">
+        <h3><a href="https://www.apartments.com/4215-linden-ave-n-seattle-wa-unit-2/8gtf9n3/" target="_blank" rel="noopener">4215 Linden Ave N #2 <span class="ext">↗</span></a></h3>
+        <span class="pill ok">✓ B.F. Day</span>
+      </div>
+      <p class="bldg">98103 · 3 blocks from the school</p>
+      <div class="specs">
+        <div class="spec"><span class="k">Rent</span><span class="v rent">$1,995</span></div>
+        <div class="spec"><span class="k">Beds</span><span class="v">2 BR / 1 BA</span></div>
+        <div class="spec"><span class="k">Sq Ft</span><span class="v">710</span></div>
+        <div class="spec"><span class="k">W/D</span><span class="v confirm">Confirm on call</span></div>
+      </div>
+      <div class="contact"><span class="k">Contact</span>Request a tour on the listing</div>
+    </article>
+
+    <article class="listing">
+      <div class="listing-head">
+        <h3><a href="https://www.apartments.com/4461-woodland-park-ave-n-seattle-wa-unit-a/xdpt9dm/" target="_blank" rel="noopener">4461 Woodland Park Ave N #A <span class="ext">↗</span></a></h3>
+        <span class="pill ok">✓ B.F. Day</span>
+      </div>
+      <p class="bldg">98103</p>
+      <div class="specs">
+        <div class="spec"><span class="k">Rent</span><span class="v rent">$1,995</span></div>
+        <div class="spec"><span class="k">Beds</span><span class="v">2 BR / 1 BA</span></div>
+        <div class="spec"><span class="k">Sq Ft</span><span class="v">800</span></div>
+        <div class="spec"><span class="k">W/D</span><span class="v confirm">Confirm on call</span></div>
+      </div>
+      <div class="contact"><span class="k">Contact</span>Request a tour on the listing</div>
+    </article>
+
+    <article class="listing">
+      <div class="listing-head">
+        <h3><a href="https://www.apartments.com/110-nw-39th-st-seattle-wa/jye5m95/" target="_blank" rel="noopener">110 NW 39th St #3 <span class="ext">↗</span></a></h3>
+        <span class="pill ok">✓ B.F. Day</span>
+      </div>
+      <p class="bldg">Condo · 98107</p>
+      <div class="specs">
+        <div class="spec"><span class="k">Rent</span><span class="v rent">$2,295</span></div>
+        <div class="spec"><span class="k">Beds</span><span class="v">2 BR / 1 BA</span></div>
+        <div class="spec"><span class="k">Sq Ft</span><span class="v confirm">Confirm</span></div>
+        <div class="spec"><span class="k">W/D</span><span class="v confirm">Confirm on call</span></div>
+      </div>
+      <div class="contact"><span class="k">Contact</span>Request a tour on the listing</div>
+    </article>
+
+    <article class="listing">
+      <div class="listing-head">
+        <h3><a href="https://www.oristoneway.com/" target="_blank" rel="noopener">4453–4455 Stone Way N <span class="ext">↗</span></a></h3>
+        <span class="pill ok">✓ B.F. Day</span>
+      </div>
+      <p class="bldg">Ori Stone Way · apartment community · 98103</p>
+      <div class="specs">
+        <div class="spec"><span class="k">Rent</span><span class="v rent">Call</span></div>
+        <div class="spec"><span class="k">Beds</span><span class="v">2 BR</span></div>
+        <div class="spec"><span class="k">Sq Ft</span><span class="v confirm">Confirm</span></div>
+        <div class="spec"><span class="k">W/D</span><span class="v confirm">Confirm · newer bldg</span></div>
+      </div>
+      <div class="contact"><span class="k">Contact</span><a href="tel:+12533523866">(253) 352-3866</a> · leasing office</div>
+    </article>
+
   </div>
-  <p class="note">Rows 1 &amp; 7 are apartment communities with a direct leasing line (easiest to book). Rows 2–6 are individual condos/units — several don’t publish a phone, so contact routes through the listing’s “Request a tour” button.</p>
 
   <div class="cards2">
     <div class="infocard">
       <h3>Property manager — one call, several buildings</h3>
       <p style="margin:0">
-        <strong>Cornell &amp; Associates — <a href="tel:+12063290085" style="color:var(--accent);text-decoration:none">(206) 329-0085</a></strong><br>
+        <strong>Cornell &amp; Associates — <a href="tel:+12063290085">(206) 329-0085</a></strong><br>
         Manages many small Fremont buildings in the B.F. Day area (Bridgeview, Chen, Dannywood, DeSoto Arms,
         Francis Ave, Fremont 5-plex, Southwind, Gracey). Ask what 2BR ≤ $2,400 is available and whether it’s
         assigned to B.F. Day.
@@ -157,11 +213,11 @@
       </ul>
     </div>
 
-    <div class="infocard">
+    <div class="infocard script">
       <h3>Call script</h3>
-      <p class="script">“Hi, I’m looking for a 2-bedroom under $2,400 at [address]. Is it still available, how many square feet,
+      <p class="q">“Hi, I’m looking for a 2-bedroom under $2,400 at [address]. Is it still available, how many square feet,
       does it have in-unit washer/dryer and a yard, and can I tour it this Friday or Saturday?”</p>
-      <p class="note">School assignment is already confirmed as B.F. Day — worth a quick sanity-check with the agent, but you don’t need to hunt for it.</p>
+      <p class="note">School assignment is already confirmed as B.F. Day — a quick sanity-check with the agent is fine, but you don’t need to hunt for it.</p>
     </div>
   </div>
 
