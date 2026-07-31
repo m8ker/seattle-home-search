@@ -3,12 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fremont Rentals — B.F. Day Elementary Area</title>
+<title>Fremont / B.F. Day Rental Shortlist</title>
 <style>
   :root{
     --ink:#1c2430; --muted:#5c6673; --line:#e4e8ee; --bg:#f6f8fa;
-    --accent:#2b6cb0; --good:#1f7a4d; --goodbg:#e6f4ec; --warn:#8a6d1f;
-    --card:#ffffff;
+    --accent:#2b6cb0; --good:#1f7a4d; --goodbg:#e6f4ec; --amber:#8a6d1f; --card:#ffffff;
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
@@ -17,214 +16,289 @@
   header h1{font-size:1.5rem;margin:0 0 6px;line-height:1.25}
   .meta{color:var(--muted);font-size:.9rem;margin:0 0 4px}
   .meta strong{color:var(--ink)}
-  .verified{background:var(--goodbg);border:1px solid #bfe3cd;color:#13563a;
-            padding:12px 14px;border-radius:10px;font-size:.88rem;margin:16px 0 20px}
-  .verified b{color:#0f4a31}
   .mapcard{background:var(--card);border:1px solid var(--line);border-radius:12px;
-           overflow:hidden;box-shadow:0 1px 3px rgba(20,30,45,.06);margin-bottom:24px}
+           overflow:hidden;box-shadow:0 1px 3px rgba(20,30,45,.06);margin:16px 0 8px}
   .mapcard iframe{display:block;width:100%;height:420px;border:0}
   .maptip{padding:10px 14px;font-size:.8rem;color:var(--muted);border-top:1px solid var(--line);
-          display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+          display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center}
   .maptip a{color:var(--accent);text-decoration:none;font-weight:600}
-  h2{font-size:1.1rem;margin:24px 2px 12px}
+  .legend{display:flex;gap:14px;flex-wrap:wrap}
+  .legend span{display:inline-flex;align-items:center;gap:5px}
+  .dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+  .dot.blue{background:#2b6cb0}.dot.gray{background:#9aa4b0}
+  .barrow{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:22px 2px 4px;flex-wrap:wrap}
+  h2{font-size:1.12rem;margin:0}
+  .sec-sub{color:var(--muted);font-size:.82rem;margin:2px 2px 12px}
+  .progress{font-size:.85rem;color:var(--muted)}
+  .progress b{color:var(--good)}
+  .reset{font-size:.78rem;color:var(--accent);background:none;border:0;cursor:pointer;padding:0}
   .listings{display:grid;grid-template-columns:1fr;gap:12px}
   @media (min-width:680px){ .listings{grid-template-columns:1fr 1fr} }
   .listing{background:var(--card);border:1px solid var(--line);border-radius:12px;
-           padding:15px 16px;box-shadow:0 1px 3px rgba(20,30,45,.05)}
-  .listing-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
-  .listing-head h3{margin:0;font-size:1.04rem;line-height:1.25;flex:1 1 auto;min-width:0}
-  .listing-head .pill{flex:0 0 auto}
+           padding:15px 16px;box-shadow:0 1px 3px rgba(20,30,45,.05);transition:border-color .15s,background .15s}
+  .listing.form{border-style:dashed}
+  .listing.checked{border-style:solid;border-color:#bfe3cd;background:#fbfefc}
+  .listing.checked h3 a{color:var(--good)}
+  .listing-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+  .listing-head h3{margin:0;font-size:1.02rem;line-height:1.3;flex:1 1 auto;min-width:0}
   .listing-head h3 a{color:var(--accent);text-decoration:none}
   .listing-head h3 a:hover{text-decoration:underline}
   .ext{font-size:.8em;opacity:.7}
-  .bldg{color:var(--muted);font-size:.82rem;margin:3px 0 0}
-  .pill{display:inline-block;padding:3px 9px;border-radius:999px;font-size:.72rem;font-weight:700;white-space:nowrap}
-  .pill.ok{background:var(--goodbg);color:var(--good);border:1px solid #bfe3cd}
-  .specs{display:flex;flex-wrap:wrap;gap:14px 18px;margin:13px 0 0;padding:12px 0 0;border-top:1px solid var(--line)}
-  .spec{display:flex;flex-direction:column;min-width:52px}
-  .spec .k{font-size:.66rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
-  .spec .v{font-size:.92rem;font-weight:600}
-  .spec .v.rent{font-size:1.02rem;font-weight:800}
-  .spec .v.confirm{color:var(--warn);font-weight:600;font-size:.84rem}
-  .contact{margin-top:12px;padding-top:11px;border-top:1px solid var(--line);font-size:.9rem}
-  .contact .k{font-size:.66rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-right:6px}
-  .contact a{color:var(--accent);text-decoration:none;font-weight:700}
-  .cards2{display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px}
-  @media (min-width:680px){ .cards2{grid-template-columns:1fr 1fr} }
-  .infocard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
-  .infocard h3{margin:0 0 6px;font-size:1rem}
-  .infocard a{color:var(--accent);text-decoration:none}
-  .excluded li{margin:5px 0}
-  .script p.q{background:#eef3f8;border-left:3px solid var(--accent);padding:11px 14px;border-radius:6px;
-              font-size:.9rem;color:#243b52;margin:0}
-  .note{color:var(--muted);font-size:.8rem;margin:8px 2px 0}
+  .chkwrap{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;user-select:none}
+  .chkwrap input{width:26px;height:26px;cursor:pointer;accent-color:var(--good);margin:0}
+  .chkwrap .lbl{font-size:.6rem;letter-spacing:.03em;text-transform:uppercase;color:var(--muted)}
+  .listing.checked .chkwrap .lbl{color:var(--good);font-weight:700}
+  .addr-line{color:var(--ink);font-size:.9rem;margin:9px 0 0}
+  .tag{display:inline-block;margin:8px 0 0;padding:2px 8px;border-radius:999px;font-size:.72rem;font-weight:700;
+       background:#fff8e8;color:var(--amber);border:1px solid #f0e2bd}
+  .links{display:flex;flex-wrap:wrap;gap:8px 16px;margin:8px 0 0;font-size:.9rem}
+  .links a{color:var(--accent);text-decoration:none;font-weight:600;white-space:nowrap}
+  .links .phone::before{content:"\260E\FE0E";margin-right:5px;opacity:.7;font-weight:400}
+  .caveat{color:var(--amber);font-size:.78rem;margin:6px 0 0}
+  .notes{width:100%;margin-top:11px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;
+         font:inherit;font-size:.88rem;color:var(--ink);background:#fcfdfe;resize:vertical;min-height:52px}
+  .notes:focus{outline:none;border-color:var(--accent);background:#fff}
   footer{color:var(--muted);font-size:.79rem;margin-top:26px;text-align:center}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <h1>Fremont Rentals — B.F. Day Elementary Area</h1>
-    <p class="meta"><strong>Criteria:</strong> 2+ bedrooms · max $2,400/mo · assigned to B.F. Day Elementary</p>
-    <p class="meta"><strong>Nice-to-haves:</strong> in-unit washer/dryer, yard &nbsp;·&nbsp; <strong>For tours:</strong> Fri 7/31 &amp; Sat 8/1</p>
+    <h1>Fremont / B.F. Day Rental Shortlist</h1>
+    <p class="meta"><strong>Zillow rentals in the B.F. Day Elementary boundary</strong> · filters: up to $2.3K · 1+ bed · move-in ~8/15/2026</p>
+    <p class="meta">Tap a property name for its Zillow listing · check the box when you’ve reached out · notes save automatically on this device.</p>
   </header>
 
-  <div class="verified">
-    ✅ <b>School assignment verified</b> for every listing on 7/27/2026 via Seattle Public Schools'
-    official “Find Your School” lookup — each returned <b>B.F. Day Elementary</b> as its Attendance Area School.
-    Assignments can change between school years; reconfirm with SPS Admissions (206-252-0760) before signing.
-  </div>
-
   <div class="mapcard">
-    <iframe src="https://www.google.com/maps/d/embed?mid=1Et7z73vkD_1g_XdBlrs-Z3JrwjIT0vA" loading="lazy" title="Map of B.F. Day area rentals"></iframe>
+    <iframe src="https://www.google.com/maps/d/embed?mid=1Et7z73vkD_1g_XdBlrs-Z3JrwjIT0vA" loading="lazy" title="Map of shortlisted rentals"></iframe>
     <div class="maptip">
-      <span>Blue pins = the 7 listings · pin at 3921 Linden Ave N = B.F. Day Elementary</span>
+      <span class="legend">
+        <span><span class="dot blue"></span> Has phone (13)</span>
+        <span><span class="dot gray"></span> Form-request only (8)</span>
+      </span>
       <a href="https://www.google.com/maps/d/viewer?mid=1Et7z73vkD_1g_XdBlrs-Z3JrwjIT0vA" target="_blank" rel="noopener">Open full map ↗</a>
     </div>
   </div>
 
-  <h2>Verified B.F. Day listings <span style="font-weight:400;color:var(--muted);font-size:.85rem">(tap an address for the listing)</span></h2>
-  <div class="listings">
+  <div class="barrow">
+    <h2>Has phone contact</h2>
+    <span class="progress"><b id="pcount">0</b> of 21 contacted · <button class="reset" id="resetbtn" type="button">reset</button></span>
+  </div>
+  <p class="sec-sub">Direct phone number listed — quickest to reach for a tour.</p>
+  <div class="listings" id="group-phone">
 
-    <article class="listing">
-      <div class="listing-head">
-        <h3><a href="https://artlinefremont.com/" target="_blank" rel="noopener">3609 1st Ave NW <span class="ext">↗</span></a></h3>
-        <span class="pill ok">✓ B.F. Day</span>
-      </div>
-      <p class="bldg">Artline Fremont · apartment community · 98107</p>
-      <div class="specs">
-        <div class="spec"><span class="k">Rent</span><span class="v rent">Call</span></div>
-        <div class="spec"><span class="k">Beds</span><span class="v">2 BR</span></div>
-        <div class="spec"><span class="k">Sq Ft</span><span class="v">~909</span></div>
-        <div class="spec"><span class="k">W/D</span><span class="v confirm">Confirm · newer bldg</span></div>
-      </div>
-      <div class="contact"><span class="k">Contact</span><a href="tel:+12063124993">(206) 312-4993</a> · leasing office</div>
+    <article class="listing" data-id="prescott-wallingford">
+      <div class="listing-head"><h3><a href="https://www.zillow.com/apartments/seattle-wa/prescott-wallingford-apartments/5XkGQ8/" target="_blank" rel="noopener">Prescott Wallingford Apartments <span class="ext">↗</span></a></h3><label class="chkwrap"><input type="checkbox" class="chk"><span class="lbl">Done</span></label></div>
+      <p class="addr-line">3920 Stone Way N, Seattle, WA 98103</p>
+      <div class="links"><a class="phone" href="tel:+13609791273">(360) 979-1273</a><a href="https://www.zillow.com/apartments/seattle-wa/prescott-wallingford-apartments/5XkGQ8/" target="_blank" rel="noopener">Zillow ↗</a></div>
+      <textarea class="notes" placeholder="Notes — availability, rent, W/D, yard, impressions…"></textarea>
     </article>
 
-    <article class="listing">
-      <div class="listing-head">
-        <h3><a href="https://www.redfin.com/WA/Seattle/4345-4th-Ave-NW-98107/home/302533" target="_blank" rel="noopener">4345 4th Ave NW <span class="ext">↗</span></a></h3>
-        <span class="pill ok">✓ B.F. Day</span>
-      </div>
-      <p class="bldg">98107</p>
-      <div class="specs">
-        <div class="spec"><span class="k">Rent</span><span class="v rent">$1,650</span></div>
-        <div class="spec"><span class="k">Beds</span><span class="v">2 BR / 2 BA</span></div>
-        <div class="spec"><span class="k">Sq Ft</span><span class="v">1,200</span></div>
-        <div class="spec"><span class="k">W/D</span><span class="v confirm">Confirm on call</span></div>
-      </div>
-      <div class="contact"><span class="k">Contact</span>Request a tour on the listing</div>
+    <article class="listing" data-id="portal">
+      <div class="listing-head"><h3><a href="https://www.zillow.com/apartments/seattle-wa/portal-apartments/Chh4sF/" target="_blank" rel="noopener">Portal Apartments <span class="ext">↗</span></a></h3><label class="chkwrap"><input type="checkbox" class="chk"><span class="lbl">Done</span></label></div>
+      <p class="addr-line">743 N 35th St, Seattle, WA 98103</p>
+      <div class="links"><a class="phone" href="tel:+15642138750">(564) 213-8750</a><a href="https://www.zillow.com/apartments/seattle-wa/portal-apartments/Chh4sF/" target="_blank" rel="noopener">Zillow ↗</a></div>
+      <textarea class="notes" placeholder="Notes — availability, rent, W/D, yard, impressions…"></textarea>
     </article>
 
-    <article class="listing">
-      <div class="listing-head">
-        <h3><a href="https://www.apartments.com/201-nw-39th-st-seattle-wa/fepygqv/" target="_blank" rel="noopener">201 NW 39th St <span class="ext">↗</span></a></h3>
-        <span class="pill ok">✓ B.F. Day</span>
-      </div>
-      <p class="bldg">Top-floor condo · 98107</p>
-      <div class="specs">
-        <div class="spec"><span class="k">Rent</span><span class="v rent">$1,650</span></div>
-        <div class="spec"><span class="k">Beds</span><span class="v">2 BR / 1 BA</span></div>
-        <div class="spec"><span class="k">Sq Ft</span><span class="v confirm">Confirm</span></div>
-        <div class="spec"><span class="k">W/D</span><span class="v confirm">Not listed — confirm</span></div>
-      </div>
-      <div class="contact"><span class="k">Contact</span>“Miles” via the listing</div>
+    <article class="listing" data-id="broadstone-vin">
+      <div class="listing-head"><h3><a href="https://www.zillow.com/apartments/seattle-wa/broadstone-vin/9VWPWM/" target="_blank" rel="noopener">Broadstone Vin <span class="ext">↗</span></a></h3><label class="chkwrap"><input type="checkbox" class="chk"><span class="lbl">Done</span></label></div>
+      <p class="addr-line">4106 Stone Way N, Seattle, WA 98103</p>
+      <div class="links"><a class="phone" href="tel:+12065942798">(206) 594-2798</a><a href="https://www.zillow.com/apartments/seattle-wa/broadstone-vin/9VWPWM/" target="_blank" rel="noopener">Zillow ↗</a></div>
+      <textarea class="notes" placeholder="Notes — availability, rent, W/D, yard, impressions…"></textarea>
     </article>
 
-    <article class="listing">
-      <div class="listing-head">
-        <h3><a href="https://www.apartments.com/4215-linden-ave-n-seattle-wa-unit-2/8gtf9n3/" target="_blank" rel="noopener">4215 Linden Ave N #2 <span class="ext">↗</span></a></h3>
-        <span class="pill ok">✓ B.F. Day</span>
-      </div>
-      <p class="bldg">98103 · 3 blocks from the school</p>
-      <div class="specs">
-        <div class="spec"><span class="k">Rent</span><span class="v rent">$1,995</span></div>
-        <div class="spec"><span class="k">Beds</span><span class="v">2 BR / 1 BA</span></div>
-        <div class="spec"><span class="k">Sq Ft</span><span class="v">710</span></div>
-        <div class="spec"><span class="k">W/D</span><span class="v confirm">Confirm on call</span></div>
-      </div>
-      <div class="contact"><span class="k">Contact</span>Request a tour on the listing</div>
+    <article class="listing" data-id="rev-fremont">
+      <div class="listing-head"><h3><a href="https://www.zillow.com/apartments/seattle-wa/rev-fremont/5XmMdN/" target="_blank" rel="noopener">REV Fremont <span class="ext">↗</span></a></h3><label class="chkwrap"><input type="checkbox" class="chk"><span class="lbl">Done</span></label></div>
+      <p class="addr-line">317 NW 41st St, Seattle, WA 98107</p>
+      <div class="links"><a class="phone" href="tel:+12064832358">(206) 483-2358</a><a href="https://www.zillow.com/apartments/seattle-wa/rev-fremont/5XmMdN/" target="_blank" rel="noopener">Zillow ↗</a></div>
+      <textarea class="notes" placeholder="Notes — availability, rent, W/D, yard, impressions…"></textarea>
     </article>
 
-    <article class="listing">
-      <div class="listing-head">
-        <h3><a href="https://www.apartments.com/4461-woodland-park-ave-n-seattle-wa-unit-a/xdpt9dm/" target="_blank" rel="noopener">4461 Woodland Park Ave N #A <span class="ext">↗</span></a></h3>
-        <span class="pill ok">✓ B.F. Day</span>
-      </div>
-      <p class="bldg">98103</p>
-      <div class="specs">
-        <div class="spec"><span class="k">Rent</span><span class="v rent">$1,995</span></div>
-        <div class="spec"><span class="k">Beds</span><span class="v">2 BR / 1 BA</span></div>
-        <div class="spec"><span class="k">Sq Ft</span><span class="v">800</span></div>
-        <div class="spec"><span class="k">W/D</span><span class="v confirm">Confirm on call</span></div>
-      </div>
-      <div class="contact"><span class="k">Contact</span>Request a tour on the listing</div>
+    <article class="listing" data-id="ori-stone-way">
+      <div class="listing-head"><h3><a href="https://www.zillow.com/apartments/seattle-wa/ori-stone-way-apartments/CgxGGC/" target="_blank" rel="noopener">Ori Stone Way Apartments <span class="ext">↗</span></a></h3><label class="chkwrap"><input type="checkbox" class="chk"><span class="lbl">Done</span></label></div>
+      <p class="addr-line">4453 Stone Way N, Seattle, WA 98103</p>
+      <div class="links"><a class="phone" href="tel:+12067364195">(206) 736-4195</a><a href="https://www.zillow.com/apartments/seattle-wa/ori-stone-way-apartments/CgxGGC/" target="_blank" rel="noopener">Zillow ↗</a></div>
+      <textarea class="notes" placeholder="Notes — availability, rent, W/D, yard, impressions…"></textarea>
     </article>
 
-    <article class="listing">
-      <div class="listing-head">
-        <h3><a href="https://www.apartments.com/110-nw-39th-st-seattle-wa/jye5m95/" target="_blank" rel="noopener">110 NW 39th St #3 <span class="ext">↗</span></a></h3>
-        <span class="pill ok">✓ B.F. Day</span>
-      </div>
-      <p class="bldg">Condo · 98107</p>
-      <div class="specs">
-        <div class="spec"><span class="k">Rent</span><span class="v rent">$2,295</span></div>
-        <div class="spec"><span class="k">Beds</span><span class="v">2 BR / 1 BA</span></div>
-        <div class="spec"><span class="k">Sq Ft</span><span class="v confirm">Confirm</span></div>
-        <div class="spec"><span class="k">W/D</span><span class="v confirm">Confirm on call</span></div>
-      </div>
-      <div class="contact"><span class="k">Contact</span>Request a tour on the listing</div>
+    <article class="listing" data-id="waterway">
+      <div class="listing-head"><h3><a href="https://www.zillow.com/apartments/seattle-wa/the-waterway-building/ChWxYB/" target="_blank" rel="noopener">The Waterway Building <span class="ext">↗</span></a></h3><label class="chkwrap"><input type="checkbox" class="chk"><span class="lbl">Done</span></label></div>
+      <p class="addr-line">106 N 36th St, Seattle, WA 98103</p>
+      <div class="links"><a class="phone" href="tel:+12065020917">(206) 502-0917</a><a href="https://www.zillow.com/apartments/seattle-wa/the-waterway-building/ChWxYB/" target="_blank" rel="noopener">Zillow ↗</a></div>
+      <textarea class="notes" placeholder="Notes — availability, rent, W/D, yard, impressions…"></textarea>
     </article>
 
-    <article class="listing">
-      <div class="listing-head">
-        <h3><a href="https://www.oristoneway.com/" target="_blank" rel="noopener">4453–4455 Stone Way N <span class="ext">↗</span></a></h3>
-        <span class="pill ok">✓ B.F. Day</span>
-      </div>
-      <p class="bldg">Ori Stone Way · apartment community · 98103</p>
-      <div class="specs">
-        <div class="spec"><span class="k">Rent</span><span class="v rent">Call</span></div>
-        <div class="spec"><span class="k">Beds</span><span class="v">2 BR</span></div>
-        <div class="spec"><span class="k">Sq Ft</span><span class="v confirm">Confirm</span></div>
-        <div class="spec"><span class="k">W/D</span><span class="v confirm">Confirm · newer bldg</span></div>
-      </div>
-      <div class="contact"><span class="k">Contact</span><a href="tel:+12533523866">(253) 352-3866</a> · leasing office</div>
+    <article class="listing" data-id="collage">
+      <div class="listing-head"><h3><a href="https://www.zillow.com/apartments/seattle-wa/collage/5XkHLZ/" target="_blank" rel="noopener">Collage <span class="ext">↗</span></a></h3><label class="chkwrap"><input type="checkbox" class="chk"><span class="lbl">Done</span></label></div>
+      <p class="addr-line">3606 Woodland Park Ave N, Seattle, WA 98103</p>
+      <div class="links"><a class="phone" href="tel:+14255170993">(425) 517-0993</a><a href="https://www.zillow.com/apartments/seattle-wa/collage/5XkHLZ/" target="_blank" rel="noopener">Zillow ↗</a></div>
+      <textarea class="notes" placeholder="Notes — availability, rent, W/D, yard, impressions…"></textarea>
+    </article>
+
+    <article class="listing" data-id="fremont-place">
+      <div class="listing-head"><h3><a href="https://www.zillow.com/apartments/seattle-wa/fremont-place/CkBN37/" target="_blank" rel="noopener">Fremont Place <span class="ext">↗</span></a></h3><label class="chkwrap"><input type="checkbox" class="chk"><span class="lbl">Done</span></label></div>
+      <p class="addr-line">3519 Fremont Pl N, Seattle, WA 98103</p>
+      <div class="links"><a class="phone" href="tel:+12065580750">(206) 558-0750</a><a href="https://www.zillow.com/apartments/seattle-wa/fremont-place/CkBN37/" target="_blank" rel="noopener">Zillow ↗</a></div>
+      <textarea class="notes" placeholder="Notes — availability, rent, W/D, yard, impressions…"></textarea>
+    </article>
+
+    <article class="listing" data-id="the-cline">
+      <div class="listing-head"><h3><a href="https://www.zillow.com/apartments/seattle-wa/the-cline/Cpsz6t/" target="_blank" rel="noopener">The Cline <span class="ext">↗</span></a></h3><label class="chkwrap"><input type="checkbox" class="chk"><span class="lbl">Done</span></label></div>
+      <p class="addr-line">3665 Stone Way N, Seattle, WA 98103</p>
+      <div class="links"><a class="phone" href="tel:+13604439075">(360) 443-9075</a><a href="https://www.zillow.com/apartments/seattle-wa/the-cline/Cpsz6t/" target="_blank" rel="noopener">Zillow ↗</a></div>
+      <textarea class="notes" placeholder="Notes — availability, rent, W/D, yard, impressions…"></textarea>
+    </article>
+
+    <article class="listing" data-id="pickering-place">
+      <div class="listing-head"><h3><a href="https://www.zillow.com/apartments/seattle-wa/pickering-place-apartments/CkBR3F/" target="_blank" rel="noopener">Pickering Place Apartments <span class="ext">↗</span></a></h3><label class="chkwrap"><input type="checkbox" class="chk"><span class="lbl">Done</span></label></div>
+      <p class="addr-line">1307 N 43rd St, Seattle, WA 98103</p>
+      <div class="links"><a class="phone" href="tel:+14254842341">(425) 484-2341</a><a href="https://www.zillow.com/apartments/seattle-wa/pickering-place-apartments/CkBR3F/" target="_blank" rel="noopener">Zillow ↗</a></div>
+      <textarea class="notes" placeholder="Notes — availability, rent, W/D, yard, impressions…"></textarea>
+    </article>
+
+    <article class="listing" data-id="smith-and-burns">
+      <div class="listing-head"><h3><a href="https://www.zillow.com/apartments/seattle-wa/smith-and-burns/65d67d/" target="_blank" rel="noopener">Smith and Burns <span class="ext">↗</span></a></h3><label class="chkwrap"><input type="checkbox" class="chk"><span class="lbl">Done</span></label></div>
+      <p class="addr-line">4455 Interlake Ave N, Seattle, WA 98103</p>
+      <div class="links"><a class="phone" href="tel:+12534001646">(253) 400-1646</a><a href="https://www.zillow.com/apartments/seattle-wa/smith-and-burns/65d67d/" target="_blank" rel="noopener">Zillow ↗</a></div>
+      <textarea class="notes" placeholder="Notes — availability, rent, W/D, yard, impressions…"></textarea>
+    </article>
+
+    <article class="listing" data-id="gracey">
+      <div class="listing-head"><h3><a href="https://www.zillow.com/apartments/seattle-wa/the-gracey-apartments/CrVj3m/" target="_blank" rel="noopener">The Gracey Apartments <span class="ext">↗</span></a></h3><label class="chkwrap"><input type="checkbox" class="chk"><span class="lbl">Done</span></label></div>
+      <p class="addr-line">201 NW 39th St, Seattle, WA 98107</p>
+      <div class="links"><a class="phone" href="tel:+14255878694">(425) 587-8694</a><a href="https://www.zillow.com/apartments/seattle-wa/the-gracey-apartments/CrVj3m/" target="_blank" rel="noopener">Zillow ↗</a></div>
+      <textarea class="notes" placeholder="Notes — availability, rent, W/D, yard, impressions…"></textarea>
+    </article>
+
+    <article class="listing" data-id="providential-37th">
+      <div class="listing-head"><h3><a href="https://www.zillow.com/b/2113-n-37th-st-seattle-wa-5YCHNK/" target="_blank" rel="noopener">2113 N 37th St <span class="ext">↗</span></a></h3><label class="chkwrap"><input type="checkbox" class="chk"><span class="lbl">Done</span></label></div>
+      <p class="addr-line">2113 N 37th St, Seattle, WA 98103 · Providential Properties LLC</p>
+      <div class="links"><a class="phone" href="tel:+14253865882">(425) 386-5882</a><a href="https://www.zillow.com/b/2113-n-37th-st-seattle-wa-5YCHNK/" target="_blank" rel="noopener">Zillow ↗</a></div>
+      <p class="caveat">⚠ Phone taken from a photo watermark — verify before calling.</p>
+      <textarea class="notes" placeholder="Notes — availability, rent, W/D, yard, impressions…"></textarea>
     </article>
 
   </div>
 
-  <div class="cards2">
-    <div class="infocard">
-      <h3>Property manager — one call, several buildings</h3>
-      <p style="margin:0">
-        <strong>Cornell &amp; Associates — <a href="tel:+12063290085">(206) 329-0085</a></strong><br>
-        Manages many small Fremont buildings in the B.F. Day area (Bridgeview, Chen, Dannywood, DeSoto Arms,
-        Francis Ave, Fremont 5-plex, Southwind, Gracey). Ask what 2BR ≤ $2,400 is available and whether it’s
-        assigned to B.F. Day.
-      </p>
-      <p class="note">Also seen on aggregators (verify building + assignment on call): (425) 569-4785 · (206) 567-8141</p>
-    </div>
+  <div class="barrow" style="margin-top:28px">
+    <h2>Form-request only</h2>
+  </div>
+  <p class="sec-sub">No phone number published — inquire through the Zillow listing’s contact form.</p>
+  <div class="listings" id="group-form">
 
-    <div class="infocard excluded">
-      <h3>Checked &amp; excluded — not B.F. Day</h3>
-      <ul style="margin:6px 0 0;padding-left:18px">
-        <li><strong>5117 2nd Ave NW, 98107</strong> — $2,500 · assigned to <b>West Woodland</b> (and over budget)</li>
-        <li><strong>912 NW 56th St, 98107</strong> — $2,720 · assigned to <b>West Woodland</b> (and over budget)</li>
-      </ul>
-    </div>
+    <article class="listing form" data-id="3825-whitman">
+      <div class="listing-head"><h3><a href="https://www.zillow.com/b/3825-whitman-ave-n-seattle-wa-9VWP9N/" target="_blank" rel="noopener">3825 Whitman Ave N <span class="ext">↗</span></a></h3><label class="chkwrap"><input type="checkbox" class="chk"><span class="lbl">Done</span></label></div>
+      <p class="addr-line">3825 Whitman Ave N, Seattle, WA 98103</p>
+      <span class="tag">Form inquiry only — no phone</span>
+      <div class="links"><a href="https://www.zillow.com/b/3825-whitman-ave-n-seattle-wa-9VWP9N/" target="_blank" rel="noopener">Inquire on Zillow ↗</a></div>
+      <textarea class="notes" placeholder="Notes — availability, rent, W/D, yard, impressions…"></textarea>
+    </article>
 
-    <div class="infocard script">
-      <h3>Call script</h3>
-      <p class="q">“Hi, I’m looking for a 2-bedroom under $2,400 at [address]. Is it still available, how many square feet,
-      does it have in-unit washer/dryer and a yard, and can I tour it this Friday or Saturday?”</p>
-      <p class="note">School assignment is already confirmed as B.F. Day — a quick sanity-check with the agent is fine, but you don’t need to hunt for it.</p>
-    </div>
+    <article class="listing form" data-id="cobrizo">
+      <div class="listing-head"><h3><a href="https://www.zillow.com/b/cobrizo-seattle-wa-5XkcxW/" target="_blank" rel="noopener">Cobrizo <span class="ext">↗</span></a></h3><label class="chkwrap"><input type="checkbox" class="chk"><span class="lbl">Done</span></label></div>
+      <p class="addr-line">Fremont / Wallingford — see Zillow for address</p>
+      <span class="tag">Form inquiry only — no phone</span>
+      <div class="links"><a href="https://www.zillow.com/b/cobrizo-seattle-wa-5XkcxW/" target="_blank" rel="noopener">Inquire on Zillow ↗</a></div>
+      <textarea class="notes" placeholder="Notes — availability, rent, W/D, yard, impressions…"></textarea>
+    </article>
+
+    <article class="listing form" data-id="4312-woodland-park">
+      <div class="listing-head"><h3><a href="https://www.zillow.com/b/4312-woodland-park-ave-n-seattle-wa-5jF2wv/" target="_blank" rel="noopener">4312 Woodland Park Ave N <span class="ext">↗</span></a></h3><label class="chkwrap"><input type="checkbox" class="chk"><span class="lbl">Done</span></label></div>
+      <p class="addr-line">4312 Woodland Park Ave N, Seattle, WA 98103</p>
+      <span class="tag">Form inquiry only — no phone</span>
+      <div class="links"><a href="https://www.zillow.com/b/4312-woodland-park-ave-n-seattle-wa-5jF2wv/" target="_blank" rel="noopener">Inquire on Zillow ↗</a></div>
+      <textarea class="notes" placeholder="Notes — availability, rent, W/D, yard, impressions…"></textarea>
+    </article>
+
+    <article class="listing form" data-id="4461-woodland-park">
+      <div class="listing-head"><h3><a href="https://www.zillow.com/b/4461-woodland-park-ave-n-seattle-wa-5jF2x3/" target="_blank" rel="noopener">4461 Woodland Park Ave N <span class="ext">↗</span></a></h3><label class="chkwrap"><input type="checkbox" class="chk"><span class="lbl">Done</span></label></div>
+      <p class="addr-line">4461 Woodland Park Ave N, Seattle, WA 98103</p>
+      <span class="tag">Form inquiry only — no phone</span>
+      <div class="links"><a href="https://www.zillow.com/b/4461-woodland-park-ave-n-seattle-wa-5jF2x3/" target="_blank" rel="noopener">Inquire on Zillow ↗</a></div>
+      <textarea class="notes" placeholder="Notes — availability, rent, W/D, yard, impressions…"></textarea>
+    </article>
+
+    <article class="listing form" data-id="woodland-west">
+      <div class="listing-head"><h3><a href="https://www.zillow.com/apartments/seattle-wa/woodland-west/5hFXyH/" target="_blank" rel="noopener">Woodland West <span class="ext">↗</span></a></h3><label class="chkwrap"><input type="checkbox" class="chk"><span class="lbl">Done</span></label></div>
+      <p class="addr-line">Fremont / Wallingford — see Zillow for address</p>
+      <span class="tag">Form inquiry only — no phone</span>
+      <div class="links"><a href="https://www.zillow.com/apartments/seattle-wa/woodland-west/5hFXyH/" target="_blank" rel="noopener">Inquire on Zillow ↗</a></div>
+      <textarea class="notes" placeholder="Notes — availability, rent, W/D, yard, impressions…"></textarea>
+    </article>
+
+    <article class="listing form" data-id="standard-fremont">
+      <div class="listing-head"><h3><a href="https://www.zillow.com/apartments/seattle-wa/the-standard-at-fremont/5jDzyr/" target="_blank" rel="noopener">The Standard at Fremont <span class="ext">↗</span></a></h3><label class="chkwrap"><input type="checkbox" class="chk"><span class="lbl">Done</span></label></div>
+      <p class="addr-line">Fremont — see Zillow for address</p>
+      <span class="tag">Form inquiry only — no phone</span>
+      <div class="links"><a href="https://www.zillow.com/apartments/seattle-wa/the-standard-at-fremont/5jDzyr/" target="_blank" rel="noopener">Inquire on Zillow ↗</a></div>
+      <textarea class="notes" placeholder="Notes — availability, rent, W/D, yard, impressions…"></textarea>
+    </article>
+
+    <article class="listing form" data-id="fremont-villas">
+      <div class="listing-head"><h3><a href="https://www.zillow.com/apartments/seattle-wa/fremont-villas/5jF2Bt/" target="_blank" rel="noopener">Fremont Villas <span class="ext">↗</span></a></h3><label class="chkwrap"><input type="checkbox" class="chk"><span class="lbl">Done</span></label></div>
+      <p class="addr-line">Fremont — see Zillow for address</p>
+      <span class="tag">Form inquiry only — no phone</span>
+      <div class="links"><a href="https://www.zillow.com/apartments/seattle-wa/fremont-villas/5jF2Bt/" target="_blank" rel="noopener">Inquire on Zillow ↗</a></div>
+      <textarea class="notes" placeholder="Notes — availability, rent, W/D, yard, impressions…"></textarea>
+    </article>
+
+    <article class="listing form" data-id="isherwood">
+      <div class="listing-head"><h3><a href="https://www.zillow.com/apartments/seattle-wa/isherwood-apartments/5jF2Pg/" target="_blank" rel="noopener">Isherwood Apartments <span class="ext">↗</span></a></h3><label class="chkwrap"><input type="checkbox" class="chk"><span class="lbl">Done</span></label></div>
+      <p class="addr-line">Fremont — see Zillow for address</p>
+      <span class="tag">Form inquiry only — no phone</span>
+      <div class="links"><a href="https://www.zillow.com/apartments/seattle-wa/isherwood-apartments/5jF2Pg/" target="_blank" rel="noopener">Inquire on Zillow ↗</a></div>
+      <textarea class="notes" placeholder="Notes — availability, rent, W/D, yard, impressions…"></textarea>
+    </article>
+
   </div>
 
   <footer>
-    Square footage shown where the listing published it; W/D marked “confirm on call” where not published.
-    Rents &amp; availability change daily — verify current price on the call.
+    Checkboxes and notes are saved in your browser (localStorage) on this device — they persist across visits but don’t sync between devices or people.
+    Phone numbers &amp; listings as provided; confirm current availability on the call.
   </footer>
 </div>
+
+<script>
+(function(){
+  var KEY = "bfday-shortlist-v2";
+  function load(){ try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){ return {}; } }
+  function save(d){ try { localStorage.setItem(KEY, JSON.stringify(d)); } catch(e){} }
+  var state = load();
+  var cards = Array.prototype.slice.call(document.querySelectorAll(".listing"));
+  var counter = document.getElementById("pcount");
+  function refreshCount(){
+    counter.textContent = cards.filter(function(c){ return c.querySelector(".chk").checked; }).length;
+  }
+  cards.forEach(function(card){
+    var id = card.getAttribute("data-id");
+    var chk = card.querySelector(".chk");
+    var notes = card.querySelector(".notes");
+    var s = state[id] || {};
+    if (s.checked){ chk.checked = true; card.classList.add("checked"); }
+    if (s.notes){ notes.value = s.notes; }
+    chk.addEventListener("change", function(){
+      card.classList.toggle("checked", chk.checked);
+      state[id] = Object.assign({}, state[id], { checked: chk.checked });
+      save(state); refreshCount();
+    });
+    notes.addEventListener("input", function(){
+      state[id] = Object.assign({}, state[id], { notes: notes.value });
+      save(state);
+    });
+  });
+  document.getElementById("resetbtn").addEventListener("click", function(){
+    if (!confirm("Clear all checkboxes and notes on this device?")) return;
+    state = {}; save(state);
+    cards.forEach(function(card){
+      card.querySelector(".chk").checked = false;
+      card.querySelector(".notes").value = "";
+      card.classList.remove("checked");
+    });
+    refreshCount();
+  });
+  refreshCount();
+})();
+</script>
 </body>
 </html>
